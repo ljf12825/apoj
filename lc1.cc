@@ -1,23 +1,12 @@
----
-title: LC1.TwoNumsSum
-type: file
-author: ljf12825
-date: 2026-04-27
-summary: Easy
----
+// LC1.TwoNumsSum
 
-> 题目
-
-```txt
+/*
 两数之和
 给定整数数组nums和目标值target
 返回和为target的两个整数在nums中的下标
 两个整数不能是nums中的同一个元素
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -55,4 +44,3 @@ public:
 		return {};
 	}
 };
-```

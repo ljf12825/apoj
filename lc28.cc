@@ -1,20 +1,9 @@
----
-title: LC28.FindtheIndexoftheFirstOccurrenceinaString
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC28.FindtheIndexoftheFirstOccurrenceinaString
 
-> 题目
-
-```txt
+/*
 给你两个字符串haystack和needle，如果haystack的字串能匹配needle，返回第haystack第一个字串的开始位置，否则返回-1
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <string>
 #include <vector>
@@ -102,4 +91,3 @@ int main()
 	s.strStr(haystack, needle);
 	return 0;
 }
-```

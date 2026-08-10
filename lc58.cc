@@ -1,22 +1,11 @@
----
-title: LC58.LengthofLastWord
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC58.LengthofLastWord
 
-> 题目
-
-```txt
+/*
 字符串s由若干个单词和空格组成
 求最后一个单词的长度
 单词是指仅由字母组成、不包含任何空格字符的最大子字符串
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <string>
 
@@ -34,4 +23,3 @@ public:
 		return n;
 	}
 };
-```

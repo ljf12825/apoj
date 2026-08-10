@@ -1,14 +1,6 @@
----
-title: LC35.SearchinsertPosition
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC35.SearchinsertPosition
 
-> 题目
-
-```txt
+/*
 搜索插入位置
 给定一个排序数组，寻找数组中目标值的位置，如果不存在，返回目标值应该插入的位置
 要求算法时间复杂度为O(log n)
@@ -16,11 +8,8 @@ summary: Easy
 二分查找变种
 O(log n)使用二分查找
 该题转化为寻找目标数组中大于等于目标值的元素的位置（左边界二分查找）
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -52,4 +41,3 @@ public:
 	}
 
 };
-```

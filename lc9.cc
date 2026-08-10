@@ -1,24 +1,13 @@
----
-title: LC9 IsPalindrome
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC9 IsPalindrome
 
-> 题目
-
-```txt
+/*
 回文数
 判断一个数是否是回文数
 
 边界情况
 负数、结尾是0且不等于0的数不是回文数
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 
 class Solution
@@ -39,4 +28,3 @@ public:
 		return x == reversedNumber || x == reversedNumber / 10;
 	}
 };
-```

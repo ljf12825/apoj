@@ -1,20 +1,9 @@
----
-title: LC27.RemoveElements
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC27.RemoveElements
 
-> 题目
-
-```txt
+/*
 原地移除nums中不等于val的元素，返回nums中不等于val的元素的数量
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <vector>
 
@@ -43,4 +32,3 @@ public:
 		return nums.size();
 	}
 };
-```

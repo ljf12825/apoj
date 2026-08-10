@@ -1,20 +1,10 @@
----
-title: LC69.Sqrtx
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC69.Sqrtx
 
-> 题目
-
-```txt
+/*
 给你一个非负整数x，不使用内建函数或运算符，求x的整数平方根
-```
+*/
 
-> 题解
 
-```cpp
 //方法1
 //该问题可转化为 求 n^2 <= x，求n的最大值
 //使用二分查找
@@ -74,4 +64,3 @@ public:
 		return int(x0);
 	}
 };
-```

@@ -1,20 +1,9 @@
----
-title: LC21.MergeTwoLinkedList
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC21.MergeTwoLinkedList
 
-> 题目
-
-```txt
+/*
 给定两个升序数组，合并两个数组为一个升序数组
-```
+*/
 
-> 题解
-
-```cpp
 struct LinkedNode
 {
 	int val;
@@ -70,4 +59,3 @@ public:
 		return head->next;
 	}
 };
-```

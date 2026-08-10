@@ -1,14 +1,5 @@
----
-title: LC13.RomanToInt
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
-
-> 题目
-
-```txt
+// title: LC13.RomanToInt
+/*
 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
 
 字符          数值
@@ -58,12 +49,11 @@ C 可以放在 D(500) 和 M(1000) 的左边，来表示 400 和 900。
 s 仅含字符('I', 'V', 'X', 'L', 'C', 'D', 'M')
 题目数据保证 s 是一个有效的罗马数字，且表示整数在范围[1, 3999] 内
 题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。
-IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。
-```
+IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 
+*/
 
-> 题解
+// 题解
 
-```cpp
 #include <unordered_map>
 #include <iostream>
 //不使用unordered_map
@@ -124,4 +114,3 @@ public:
 		return ans + ROMAN[s.back()];
 	}
 };
-```

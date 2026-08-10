@@ -1,20 +1,9 @@
----
-title: LC26.RemoveDuplicatesfromSortedArray
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC26.RemoveDuplicatesfromSortedArray
 
-> 题目
-
-```txt
+/*
 原地删除严格升序数组中的重复项，返回新数组的长度，元素的相对顺序应该保持一致
-```
+*/
 
-> 题解
-
-```cpp
 #include <vector>
 #include <algorithm>
 class Solution
@@ -42,4 +31,3 @@ public:
 		return nums.size();
 	}
 };
-```

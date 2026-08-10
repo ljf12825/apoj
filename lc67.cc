@@ -1,20 +1,9 @@
----
-title: LC67.AddBinary
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC67.AddBinary
 
-> 题目
-
-```txt
+/*
 给你两个二进制字符串，求和
-```
+*/
 
-> 题解
-
-```cpp
 #include <string>
 
 class Solution
@@ -39,4 +28,3 @@ public:
 		return ans;
 	}
 };
-```

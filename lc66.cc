@@ -1,22 +1,11 @@
----
-title: LC66.AddOne
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC66.AddOne
 
-> 题目
-
-```txt
+/*
 用一个vector<int>表示一个十进制非负整数
 输入vector<int>
 输出末位+1后的新数组
-```
+*/
 
-> 题解
-
-```cpp
 #include <vector>
 class Solution
 {
@@ -64,4 +53,3 @@ public:
 		return digits;
 	}
 };
-```

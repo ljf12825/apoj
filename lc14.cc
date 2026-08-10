@@ -1,14 +1,7 @@
----
-title: LC14.LongestCommonPrefix
-author: ljf12825
-date: 2026-04-27
-type: file
-summary: Easy
----
+// LC14.LongestCommonPrefix
 
-> 题目
 
-```txt
+/*
 编写一个函数来查找字符串数组中的最长公共前缀。
 
 如果不存在公共前缀，返回空字符串 ""。
@@ -28,11 +21,8 @@ summary: Easy
 1 <= strs.length <= 200
 0 <= strs[i].length <= 200
 strs[i] 如果非空，则仅由小写英文字母组成
-```
+*/
 
-> 题解
-
-```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -168,4 +158,3 @@ class Solution_5
 		return ans;
 	}
 };
-```
