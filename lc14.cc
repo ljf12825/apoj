@@ -1,33 +1,29 @@
-// LC14.LongestCommonPrefix
+// LC14.Longest Common Prefix
 
 
 /*
-编写一个函数来查找字符串数组中的最长公共前缀。
+Write a function to find the longest common prefix string amongst an array of strings
 
-如果不存在公共前缀，返回空字符串 ""。
+If there is no common prefix, return an empty string `""`.
 
-示例 1：
+Example 1:
 
-输入：strs = ["flower", "flow", "flight"]
-输出："fl"
-示例 2：
+Input: strs = ["flower", "flow", "flight"]\
+Output: "fl"
 
-输入：strs = ["dog", "racecar", "car"]
-输出：""
-解释：输入不存在公共前缀。
 
-提示：
+Example 2:
 
-1 <= strs.length <= 200
-0 <= strs[i].length <= 200
-strs[i] 如果非空，则仅由小写英文字母组成
+Input: strs = ["dog", "racecar", "car"]
+Output: ""
 */
 
-#include <iostream>
 #include <vector>
+#include <string>
 #include <algorithm>
-//Solution1：横向扫描
-class Solution_1
+
+// Solution1：横向扫描
+class Solution1
 {
 public:
 	std::string longestCommonPrefix(std::vector<std::string>& strs)
@@ -54,8 +50,8 @@ public:
 	}
 };
 
-//Solution2:横向扫描
-class Solution_2
+// Solution2: 纵向扫描
+class Solution2
 {
 public:
 	std::string longestCommonPrefix(std::vector<std::string>& strs)
@@ -76,8 +72,8 @@ public:
 	}
 };
 
-//Solution3:分治
-class Solution_3
+// Solution3:分治
+class Solution3
 {
 public:
 	std::string longestCommonPrefix(std::vector<std::string>& strs)
@@ -109,8 +105,8 @@ public:
 	}
 };
 
-//Solution4:二分查找
-class Solution_4
+// Solution4:二分查找
+class Solution4
 {
 public:
 	std::string longestCommonPrefix(std::vector<std::string>& strs)
@@ -143,8 +139,9 @@ public:
 		return true;
 	}
 };
-//Solution5:sort排序后比较首尾
-class Solution_5
+
+// Solution5:sort排序后比较首尾
+class Solution5
 {
 	std::string longestCommonPrefix(std::vector<std::string>& strs)
 	{
