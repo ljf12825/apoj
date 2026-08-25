@@ -1,15 +1,35 @@
-// LC20.ValidParentheses
+// LC20.Valid Parentheses
 
 /*
-有效的括号
-给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
-有效字符串需满足：
-左括号必须用相同类型的右括号闭合。
-左括号必须以正确的顺序闭合。
-每个右括号都有一个对应的相同类型的左括号。
+   Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]`, determain if the input string is valid\
+
+   An input string is valid if:
+
+   1. Open backets must be closed by the same type of brackets.
+   2. Open backets must be closed in the correct order.
+   3. Every close bracket has a corresponding open bracket of the same type.
+
+   Example 1:\
+   Input: s = "()"
+   Output: true
+
+   Example 2:\
+   Input: s = "()[]{}"\
+   Output: true
+
+   Example 3:\
+   Input: s = '(]'\
+   Output: false
+
+   Example 4:\
+   Input: s = "([])"\
+   Output: true
+
+   Example 5:\
+   Input: s = "([)]"\
+   Output: false
 */
 
-#include <iostream>
 #include <stack>
 #include <unordered_map>
 #include <string>
