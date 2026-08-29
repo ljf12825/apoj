@@ -1,10 +1,19 @@
-// LC28.FindtheIndexoftheFirstOccurrenceinaString
+// LC28.Find the Index of the First Occurrence in a String
 
 /*
-给你两个字符串haystack和needle，如果haystack的字串能匹配needle，返回第haystack第一个字串的开始位置，否则返回-1
+   Given two strings `needle` and `haystack`, return the index of the first occurrence of `needle` in `haystack`, or `-1` if `needle` is not part of `haystack`
+
+   Example1:
+   Input: haystack = "sadbutsad", needle = "sad"
+   Output: 0
+   Explanation: "sad" occurs at index 0 and 6. The first occurrence is at index 0, so we return 0.
+
+   Example2:
+   Input: haystack = "leetcode", needle = "leeto"
+   Output: -1
+   '
 */
 
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -19,7 +28,7 @@ public:
 			bool flag = true;
 			for (int j = 0; j < needle.size(); ++j)
 			{
-				if (haystack[i + j] != needle[j])
+				if (haystack[i + j] != needle[j]) // 不要试图在内层循环里改变循环变量，这是不良写法，会变得不幸
 				{
 					flag = false;
 					break;
