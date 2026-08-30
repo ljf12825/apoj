@@ -1,16 +1,23 @@
-// LC35.SearchinsertPosition
+// LC35.Search Insert Position
 
 /*
-搜索插入位置
-给定一个排序数组，寻找数组中目标值的位置，如果不存在，返回目标值应该插入的位置
-要求算法时间复杂度为O(log n)
+   Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
-二分查找变种
-O(log n)使用二分查找
-该题转化为寻找目标数组中大于等于目标值的元素的位置（左边界二分查找）
+   You must write an algorithm with `O(log n)` runtime complexity.
+
+   Example1:
+   Input: nums = [1, 3, 5, 6], target = 5
+   Output: 2
+
+   Example2:
+   Input: nums = [1, 3, 5, 6], target = 2
+   Output: 1
+
+   Example3:
+   Input: nums = [1, 3, 5, 6], target = 7
+   Output: 4
 */
 
-#include <iostream>
 #include <vector>
 #include <algorithm>
 
@@ -19,16 +26,17 @@ class Solution
 public:
 	int searchInsert(std::vector<int>& nums, int target)
 	{
-		int left = 0, right = 0, mid = 0;
-		while (left <= right)
-		{
-			mid = (left + right) / 2;
-			if (nums[mid] < target) left = mid + 1;
-			else right = mid - 1;
-		}
-		return left;//left最终会落在一个大于等于target值上
+        int begin = 0;
+        int end = nums.size();
+        while (begin < end) {
+            int mid = begin + (end - begin) / 2; // 这种写法是为了防止当数据量很大时，begin + end 出现溢出的情况
+            // int mid = (begin + end) / 2; // 这会先计算begin + end
+            // int mid = end / 2 + begin / 2; // 而end / 2 + begin / 2 这种写法则会面临着小数精度丢失的问题，比如 begin = 3, end = 5. end / 2 + begin / 2 == 3
+            if (target > nums[mid]) begin = mid + 1; // +1为了保证每次二分范围严格缩小，否则当出现[0, 1），这种情况时，计算之后还是[0, 1)，进入死循环
+            else end = mid;
+        }
+        return begin;
 	}
-
 };
 
 //also
