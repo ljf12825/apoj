@@ -1,18 +1,32 @@
-// LC58.LengthofLastWord
+// LC58.Length of Last Word
 
 /*
-字符串s由若干个单词和空格组成
-求最后一个单词的长度
-单词是指仅由字母组成、不包含任何空格字符的最大子字符串
+   Given a string `s` consisting of words and spaces, return the length of the last word in the string
+
+   A word is a maximal substring consisting of non-space characters only
+
+   Example1:
+   Input: s = "Hello World!"
+   Output: 5
+   Explanation: The last word is "World" with length 5.
+
+   Example2:
+   Input: s = "  fly me  to  the moon "
+   Output: 4;
+   Explanation: The last word is "moon" with length 4
+
+   Example3:
+   Input: s = "luffy is still joyboy"
+   Output: 6
+   Explanation: The last word is "joyboy" with length 6
 */
 
-#include <iostream>
 #include <string>
 
 class Solution
 {
 public:
-	int lenthOfLastWord(std::string s)
+	int lengthOfLastWord(std::string s)
 	{
 		int n = 0;
 		for (auto index = s.rbegin(); index != s.rend(); ++index)
