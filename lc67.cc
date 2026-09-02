@@ -1,12 +1,98 @@
-// LC67.AddBinary
+// LC67.Add Binary
 
 /*
-给你两个二进制字符串，求和
+   Given two binary strings `a` and `b`, return their sum as a binary string
+
+   Example 1:
+   Input: a = "11", b = "1"
+   Output: "100"
+
+   Example 2:
+   Input: a = "1010", b = "1011"
+   Output: "10101"
 */
 
 #include <string>
+#include <algorithm>
 
-class Solution
+class Solution1 {
+public:
+    std::string addBinary(std::string a, std::string b) {
+        bool flag = false;
+        std::string ls;
+        std::string ss;
+        if (a.size() > b.size()) {
+            ls = a;
+            ss = b;
+        } else {
+            ls = b;
+            ss = a;
+        }
+        int lsindex = ls.size() - 1;
+        int ssindex = ss.size() - 1;
+
+        while (ssindex >= 0) {
+            if (flag) {
+                    if (ls[lsindex] == '1' && ss[ssindex] == '1') ls[lsindex] = '1';
+                    else if (ls[lsindex] != ss[ssindex]) ls[lsindex] = '0';
+                    else if (ls[lsindex] == '0' && ss[ssindex] == '0') {
+                        ls[lsindex] = '1';
+                        flag = false;
+                    }
+                } else {
+                    if (ls[lsindex] == '1' && ss[ssindex] == '1') {
+                       ls[lsindex] = '0';
+                        flag = true;
+                    } else if (ls[lsindex] == '0' && ss[ssindex] == '0') ls[lsindex] = '0';
+                    else if (ls[lsindex] != ss[ssindex]) ls[lsindex] = '1';
+                }
+                --ssindex;
+                --lsindex;
+        }
+
+        while (lsindex >= 0) {
+            if (flag) {
+                if (ls[lsindex] == '1') ls[lsindex] = '0';
+                else {
+                    ls[lsindex] = '1';
+                    flag = false;
+                }
+            }
+            --lsindex;
+        }
+
+        if (flag) ls.insert(ls.begin(), '1');
+
+        return ls;
+    }
+};
+
+class Solution2 {
+public:
+    std::string addBinary(std::string a, std::string b) {
+        std::string result;
+        int i = a.size() - 1;
+        int j = b.size() - 1;
+        int carry = 0;
+
+        while (i >= 0 || j >= 0 || carry) {
+            // sum 是每位的结果 sum = a[i] + b[j] + carry
+            int sum = carry;
+
+            if (i >= 0) sum += a[i--] - '0';
+            if (j >= 0) sum += b[j--] - '0';
+
+            result.push_back('0' + sum % 2); // 当前位
+            carry = sum / 2; // 进位
+        }
+
+        std::reverse(result.begin(), result.end());
+
+        return result;
+    }
+};
+
+class Solution3
 {
 public:
 	std::string addBinary(std::string a, std::string b)
