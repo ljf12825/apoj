@@ -24,7 +24,7 @@
 
 #include <vector>
 
-// Solution1 insert while pop_back
+// Solution1 从左往右处理，前插入后删除
 class Solution1 {
 public:
     void merge(std::vector<int>& nums1, int m, std::vector<int> nums2, int n) {
