@@ -18,3 +18,22 @@
    Input: s = "pwwkew"
    Output: 3
 */
+
+// Solution1 暴力解法 时间复杂度O(n^2 * m)
+class Solution1 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int length = 0;
+        for (int i = 0; i < s.length(); ++i) {
+            string ss;
+            for (int j = i; j < s.length(); ++j) {
+                if (ss.find(s[j]) == string::npos) {
+                    ss.push_back(s[j]);
+                } else break;
+            }
+            length = length > ss.length() ? length : ss.length();
+        }
+
+        return length;
+    }
+};
