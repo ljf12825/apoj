@@ -44,3 +44,25 @@ public:
         return 1 + std::max(treeheight(node->left), treeheight(node->right));
     }
 };
+
+// Solution2：Bottom-Up DFS 后序遍历，结合后续遍历，在递归计算子树高度的同时判断是否平衡，如果不平衡，直接向上返回 -1，时间复杂度O(n)，空间复杂度O(h)，h为树高
+class Solution2 {
+public:
+    bool isBalanced(TreeNode* root) {
+        return checkHeight(root) != -1;
+    }
+
+    int checkHeight(TreeNode* node) {
+        if (!node) return 0;
+
+        int left = checkHeight(node->left);
+        if (left == -1) return -1;
+
+        int right = checkHeight(node->right);
+        if (right == -1) return -1;
+
+        if (abs(left - right) > 1) return -1;;
+
+        return 1 + std::max(left, right);
+    }
+};
