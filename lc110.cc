@@ -21,6 +21,8 @@
 // Definition for a binary tree node
 #include <algorithm>
 #include <cstdlib>
+#include <stack>
+#include <unordered_map>
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -64,5 +66,39 @@ public:
         if (abs(left - right) > 1) return -1;;
 
         return 1 + std::max(left, right);
+    }
+};
+
+// Solution3：基于Post-Order栈遍历 + 哈希表记录高度
+class Solution3 {
+public:
+    bool isBalanced(TreeNode* root) {
+        if (!root) return true;
+
+        std::stack<TreeNode*> st;
+        std::unordered_map<TreeNode*, int> heights;
+        TreeNode* lastVisited = nullptr;
+        TreeNode* curr = root;
+
+        while (curr || !st.empty()) {
+            while (curr) {
+                st.push(curr);
+                curr = curr->left;
+            }
+            TreeNode* node = st.top();
+            if (node->right && node->right != lastVisited) curr = node->right;
+            else {
+                int leftH = heights[node->left];
+                int rightH = heights[node->right];
+
+                if (abs(leftH - rightH) > 1) return false;
+
+                heights[node] = 1 + std::max(leftH, rightH);
+                lastVisited = node;
+                st.pop();
+            }
+        }
+
+        return true;
     }
 };
