@@ -60,3 +60,34 @@ public:
         return vec;
     }
 };
+
+// Solution2 中心扩展法，假设某个位置就是回文中心 -> 向两边扩展 -> 看能扩展多远；两种中心：奇数个字符中心为一个字符，偶数个字符中心为两个字符；时间复杂度为O(n^2)
+class Solution2 {
+public:
+    std::string longestPalindrome(std::string s) {
+        if (s.length() < 2) return s;
+
+        int start = 0;
+        int maxLen = 1;
+        for (int i = 0; i < s.length(); ++i) {
+            expand(s, i, i, start, maxLen);
+            expand(s, i, i + 1, start, maxLen);
+        }
+
+        return s.substr(start, maxLen);
+    }
+
+    void expand(const std::string& s, int left, int right, int& start, int& maxLen) {
+        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+            int len = right - left + 1;
+
+            if (len > maxLen) {
+                maxLen = len;
+                start = left;
+            }
+
+            --left;
+            ++right;
+        }
+    }
+};
