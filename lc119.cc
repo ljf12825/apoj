@@ -19,3 +19,44 @@
    Input: rowIndex = 1\
    Output: [1,1]
 */
+
+#include <vector>
+// Solution1：递归实现
+class Solution1 {
+public:
+    std::vector<int> getRow(int rowIndex) {
+        if (rowIndex == 0) return { 1 };
+        if (rowIndex == 1) return { 1, 1 };
+        else {
+            std::vector<int> prevec = getRow(rowIndex - 1);
+            std::vector<int> tempvec; // 这里会保留所有行的结果，导致空间复杂度为O(n^2)
+            int i = 0;
+            int j = 1;
+            tempvec.push_back(1);
+            while (j < prevec.size()) {
+                tempvec.push_back(prevec[i] + prevec[j]);
+                ++i;
+                ++j;
+            }
+            tempvec.push_back(1);
+
+            return tempvec;
+        }
+    }
+};
+
+// Solution2：迭代
+class Solution2 {
+public:
+    std::vector<int> getRow(int rowIndex) {
+        std::vector<int> row(rowIndex + 1, 1);
+
+        for (int i = 2; i <= rowIndex; ++i) {
+            for (int j = i - 1; j >= 1; --j) {
+                row[j] += row[j - 1]; // 直接在row里修改，自始至终只有一个row
+            }
+        }
+
+        return row;
+    }
+};
