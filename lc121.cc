@@ -30,6 +30,7 @@ public:
     int maxProfit(std::vector<int>& prices) {
         int i = 0;
         std::set<int> table;
+        // 这道题可以不用table，因为我只需要最大值，不需要其他的值，用std::max逐个比较记录最大值就行了；这样空间复杂度就变成O(1)，但是这道题双循环必然会超时
         while (i < prices.size() - 1) { // 外层 O(n)
             int j = i + 1;
             while (j < prices.size()) { // 内层 O(n)
