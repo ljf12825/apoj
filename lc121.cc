@@ -20,3 +20,41 @@
    Output: 0\
    Explanation: In this case, no transactions are done and the max profit = 0.
 */
+
+#include <algorithm>
+#include <set>
+#include <vector>
+//Solution0：暴力求解，我的解法，198/213 testcases passed 总体时间复杂度为O(n^2 log n)，这对于某些数据量很大，针对暴力解法的用例来说会超时
+class Solution0 {
+public:
+    int maxProfit(std::vector<int>& prices) {
+        int i = 0;
+        std::set<int> table;
+        while (i < prices.size() - 1) { // 外层 O(n)
+            int j = i + 1;
+            while (j < prices.size()) { // 内层 O(n)
+                table.insert(prices[j] - prices[i]); // std::set.insert() O(log n)
+                ++j;
+            }
+            ++i;
+        }
+        if (table.empty()) return 0;
+        return *table.rbegin() > 0 ? *table.rbegin() : 0;
+    }
+};
+
+// Solution1：仅维护minPrice和maxProfit
+class Solution1 {
+public:
+    int maxProfit(std::vector<int>& prices) {
+        int minPrice = prices[0];
+        int maxProfit = 0;
+
+        for (int price : prices) {
+            minPrice = std::min(price, minPrice);
+            maxProfit = std::max(maxProfit, price - minPrice);
+        }
+
+        return maxProfit;
+    }
+};
