@@ -37,3 +37,40 @@
    Input: s = "words and 987"\
    Output: 0
 */
+
+#include <string>
+#include <climits>
+
+class Solution {
+public:
+    int myAtoi(std::string s) { // 时间复杂度O(n)，空间复杂度O(1)
+        if (s[0] != '+' && s[0] != '-' && s[0] != ' ' && (s[0] > '9' || s[0] < '0')) return 0;
+        int signedness = 1;
+        int result = 0;
+        int digit = 0;
+        bool empty = true;
+        for (int i = 0; i < s.size(); ++i) {
+            if ((s[i] == ' ' && i == 0) || (s[i] == ' ' && s[i - 1] == ' ')) continue;
+            if ((s[i] == ' ' && i == 0) || (s[i] == '+' && s[i - 1] == ' ')) continue;
+            if ((s[i] == ' ' && i == 0) || (s[i] == '-' && s[i - 1] == ' ')) {
+                signedness = -1;
+                continue;
+            }
+            if (!empty && (s[i] > '9' || s[i] < '0')) break;
+            if (empty && (s[i] > '9' || s[i] < '0')) return 0;
+            digit = s[i] = '0';
+            empty = false;
+
+            if (signedness > 0) {
+                if (result > INT_MAX / 10 || (result == INT_MAX / 10 && digit > 7)) return INT_MAX;
+                result = result * 10 + digit;
+            }
+            if (signedness < 0) { // 必须分正负处理，因为32-bit signed int 不对称
+                if (result < INT_MIN / 10 || (result == INT_MIN / 10 && digit > 8)) return INT_MIN;
+                result = result * 10 - digit;
+            }
+        }
+
+        return result;
+    }
+};
