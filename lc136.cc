@@ -19,3 +19,20 @@
    Input: nums = [1]\
    Output: 1
 */
+
+#include <vector>
+// 本题要求O(n)时间复杂度，O(1)空间复杂度，那只有XOR一种解法
+// x ^ 0 = x, x ^ x = 0, x ^ y = y ^ x, (x ^ y) ^ z = x ^ (y ^ z)
+// 以 Example2 为例：4 ^ 1 ^ 2 ^ 1 ^ 2 = 4 ^ (1 ^ 1) ^ (2 ^ 2) = 4
+class Solution {
+public:
+    int singleNumber(std::vector<int> nums) {
+        int result = 0;
+
+        for (int num : nums) {
+            result ^= num;
+        }
+
+        return result;
+    }
+};
