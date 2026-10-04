@@ -31,3 +31,45 @@
     Output: false
 
 */
+#include <unordered_set>
+// Definition for singly-linked list
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+// Solution1 Folyd算法（快慢指针）只要两个指针的行进速率不同，只要有环，某个时刻快指针就会窜到慢指针后面然后追上慢指针，这是最优解O(n), O(1)
+class Solution1 {
+public:
+    bool hasCycle(ListNode* head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+
+        while (fast && fast->next) { // 值得注意的点就是要保证当前位置和下一个位置是有效的
+            fast = fast->next->next;
+            slow = slow->next;
+
+            if (fast == slow) return true;
+        }
+
+        return false;
+    }
+};
+
+// Solution2 哈希集合，存访问过的节点的地址，判断地址是否重复，O(n), O(n)
+class Solution2 {
+public:
+    bool hasCycle(ListNode* head) {
+        std::unordered_set<ListNode*> visited;
+
+        while (head) {
+            if (visited.count(head)) return true;
+
+            visited.insert(head);
+            head = head->next;
+        }
+
+        return false;
+    }
+};
