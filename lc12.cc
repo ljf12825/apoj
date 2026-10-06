@@ -39,6 +39,8 @@
 
 // Solution1：我的不优雅算法
 #include <string>
+#include <utility>
+#include <vector>
 
 class Solution1 {
 public:
@@ -182,4 +184,28 @@ public:
 
         return s;
     }
+};
+
+// Solution2 贪心查表法，标准优雅解法
+class Solution2 {
+public:
+    std::string intToRoman(int num) {
+        std::vector<std::pair<int, std::string>> table = {
+            {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
+            {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
+            {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}
+        };
+
+        std::string res;
+        for (auto& [value, symbol] : table) {
+            if (num == 0) break;
+            while (num >= value) {
+                res += symbol;
+                num -= value;
+            }
+        }
+
+        return res;
+    }
+
 };
