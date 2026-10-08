@@ -22,6 +22,7 @@
    Output: [1]
 */
 
+#include <stack>
 #include <vector>
 
 // Definition for a binary tree node
@@ -51,3 +52,61 @@ public:
 private:
     std::vector<int> result;
 };
+
+// Solution2：stack模拟调用栈
+class Solution2 {
+public:
+    std::vector<int> preorderTraversal(TreeNode* root) {
+        std::vector<int> result;
+        if (!root) return result;
+
+        std::stack<TreeNode*> st; // 存指针要比存完整的栈帧占用空间小
+        st.push(root);
+
+        while (!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+
+            result.push_back(node->val);
+
+            // FILO
+            if (node->right) st.push(node->right);
+            if (node->left) st.push(node->left);
+        }
+
+        return result;
+    }
+};
+
+// Solution3：Morris Traversal 线索连法：左子树最右 -> cur；访问时机：建立线索时
+class Solution3 {
+public:
+    std::vector<int> preorderTraversal(TreeNode* root) {
+        std::vector<int> result;
+        TreeNode* cur = root;
+        while (cur) {
+            if (!cur->left) {
+                result.push_back(cur->val);
+                cur = cur->right;
+            } else {
+                TreeNode* pre = cur->left;
+                while (pre->right && pre->right != cur) {
+                    pre = pre->right;
+                }
+
+                if (!pre->right) {
+                    pre->right = cur;
+                    result.push_back(cur->val);
+                    cur = cur->left;
+                } else {
+                    pre->right = nullptr;
+                    cur = cur->right;
+                }
+            }
+        }
+
+        return result;
+    }
+};
+
+// Solution4：线索树
