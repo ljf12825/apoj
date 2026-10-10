@@ -75,3 +75,36 @@ public:
         return vec;
     }
 };
+
+// Solution3：Morris Traversal
+class Solution3 {
+public:
+    std::vector<int> inorderTraversal(TreeNode* root) {
+        std::vector<int> result;
+        TreeNode* cur = root;
+
+        while (cur != nullptr) {
+            if (cur->left == nullptr) {
+                result.push_back(cur->val);
+                cur = cur->right;
+            } else {
+                TreeNode* predecessor = cur->left;
+
+                while (predecessor->right != nullptr && predecessor->right != cur) {
+                    predecessor = predecessor->right;
+                }
+
+                if (predecessor->right == nullptr) {
+                    predecessor->right = cur;
+                    cur = cur->left;
+                } else {
+                    predecessor->right = nullptr;
+                    result.push_back(cur->val);
+                    cur = cur->right;
+                }
+            }
+        }
+
+        return result;
+    }
+};
