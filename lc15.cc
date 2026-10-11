@@ -26,7 +26,11 @@
 */
 
 #include <algorithm>
+#include <unordered_set>
 #include <vector>
+
+// Solution0：三重循环暴力求解，这个方法最直观，但通常超时而且需要去重，这是思考的起点，但并不是最终解法。a + b + c = 0，c = -(a + b)三数之和其实是两数之和，因为任意两个数字确定，第三个数字一定唯一。假设固定a = -1，再选定b = 0，那么c = -(-1 + 0) = 1，然后就是找c。
+
 // Solution1：排序 + 双指针
 class Solution1 {
 public:
@@ -63,5 +67,35 @@ public:
         }
 
         return result;
+    }
+};
+
+// Solution2：哈希表法
+class Solution2 {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+
+        std::vector<std::vector<int>> res;
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            std::unordered_set<int> seen;
+            std::unordered_set<int> used;
+
+            for (int j = i + 1; j < n; ++j) {
+                int target = -nums[i] - nums[j];
+
+                if (seen.count(target)) {
+                    if (used.insert(target).second) res.push_back({nums[i], target, nums[j]});
+                }
+
+                seen.insert(nums[j]);
+            }
+        }
+
+        return res;
     }
 };
