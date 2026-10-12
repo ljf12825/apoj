@@ -99,3 +99,30 @@ public:
         return res;
     }
 };
+
+// Solution3：排序 + 二分查找
+class Solution3 {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+
+        std::vector<std::vector<int>> res;
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            for (int j = i + 1; j < n - 1; ++j) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+
+                int target = -nums[i] - nums[j];
+
+                auto it = std::lower_bound(nums.begin() + j + 1, nums.end(), target);
+
+                if (it != nums.end() && *it == target) res.push_back({nums[i], nums[j], target});
+            }
+        }
+
+        return res;
+    }
+};
