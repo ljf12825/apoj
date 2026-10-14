@@ -57,3 +57,38 @@
    Input: intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2\
    Output: No Intersection
 */
+
+// Definition for singly-linked list.
+#include <set>
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+// Solution1：写入表格并查表，时间复杂度为O((m + n)log m)，假设A长度为m，B长度为n，空间复杂度为O(m)
+class Solution1 {
+public:
+    ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+        std::set<ListNode*> table;
+        while (headA) {
+            table.insert(headA);
+            headA = headA->next;
+        }
+
+        while (headB) {
+            if (table.find(headB) != table.end()) return headB;
+            headB = headB->next;
+        }
+
+        return nullptr;
+    }
+};
+
+// Solution2：双指针换头法，两个指针分别从headA和headB开始走，走到头后换到对方的头节点往下走。如果skipA和skipB相同，那他们走同样的步长，会同时达到交点（如果相交），问题就是如果skipA和skipB不相等，那么如果两个链表相交，他们的相交部分长度是一样的，这样交换的走，让两个指针走的步长等于skipA + skipB，让他们同时到达相交点，时间复杂度为O(n + m)，空间复杂为O(1)
+
+class Solution2 {
+public:
+    ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+    }
+};
