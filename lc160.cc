@@ -90,5 +90,16 @@ public:
 class Solution2 {
 public:
     ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+        if (!headA || !headB) return nullptr;
+
+        ListNode* pA = headA;
+        ListNode* pB = headB;
+
+        while (pA != pB) { // 调换头结点后他们会同时到达nullptr
+            pA = (pA == nullptr) ? headB : pA->next;
+            pB = (pB == nullptr) ? headA : pB->next;
+        }
+
+        return pA;
     }
 };
