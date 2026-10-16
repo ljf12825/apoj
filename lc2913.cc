@@ -29,3 +29,75 @@
    Input: nums = [1,1]\
    Output: 3
 */
+
+/*
+   Constraints:\
+   - `1 <= nums.length <= 100`
+   - `1 <= nums[i] <= 100`
+*/
+
+#include <set>
+#include <unordered_set>
+#include <vector>
+// Solution1：我的解法，拆分，去重，统计；时间复杂度O(n^3 log n)，空间复杂度O(n^2)，这题数据规模很小，能通过
+class Solution1 {
+public:
+    int sumCounts(std::vector<int>& nums) {
+        int sum = 0;
+        int numslength = 1;
+        while (numslength <= nums.size()) {
+            std::vector<std::vector<int>> subarray = subarrayres(nums, numslength);
+
+            for (int i = 0; i < subarray.size(); ++i) {
+                sum += singlecount(subarray[i]) * singlecount(subarray[i]);
+            }
+
+            numslength++;
+        }
+
+        return sum;
+    }
+
+    std::vector<std::vector<int>> subarrayres(std::vector<int>& nums, int length) {
+        std::vector<std::vector<int>> table;
+        int index = 0;
+        while (index + length <= nums.size()) {
+            std::vector<int> temp;
+            for (int i = 0; i < length; ++i) {
+                temp.push_back(nums[index + i]);
+            }
+
+            ++index;
+            table.push_back(temp);
+        }
+
+        return table;
+    }
+
+    int singlecount(std::vector<int>& nums) {
+        std::set<int> table;
+        for (int i = 0; i < nums.size(); ++i) {
+            table.insert(nums[i]);
+        }
+
+        return table.size();
+    }
+};
+
+// Solution2：换种思考方式，从按子集规模变成按位，每一位会存在的子数组的结果累加，然后逐位前进
+class Solution2 {
+public:
+    int sumCounts(std::vector<int>& nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.size(); ++i) {
+            std::unordered_set<int> table;
+            for (int j = i; j < nums.size(); ++j) {
+                table.insert(nums[j]);
+                int d = table.size();
+                sum += d * d;
+            }
+        }
+
+        return sum;
+    }
+};
