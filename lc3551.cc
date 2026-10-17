@@ -1,0 +1,32 @@
+// LC3551. Minimum Swaps to Sort by Digit Sum
+
+/*
+    You are given an array `nums` of distinct positive integers.\
+    You need to sort the array in increasing order based on the sum of the digits of each number. If two numbers have the same digit sum, the smallr number appears first in the sorted order.
+
+    Return the minimum number of swaps required to rearrange `nums` into this sorted order.
+
+    A swap is defined as exchanging the values at two distinct positions in the array.
+*/
+
+/*
+    Example1:\
+    Input: nums = [37,100]\
+    Output: 1\
+
+    Example2:\
+    Input: nums = [22, 14, 33, 7]\
+    Ouput: 0
+
+    Example3:\
+    Input: nums = [18,43,34,16]\
+    Output: 2
+*/
+
+/*
+    Constraints:
+
+    - `1 <= nums.length <= 10^5`
+    - `1 <= nums[i] <= 10^9`
+    - `nums` consists of distinct positive integers.
+*/
