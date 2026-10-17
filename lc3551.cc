@@ -30,3 +30,60 @@
     - `1 <= nums[i] <= 10^9`
     - `nums` consists of distinct positive integers.
 */
+
+// Solution 原数组使用sort自定义排序后，通过置换环求解
+#include <algorithm>
+#include <array>
+#include <vector>
+class Solution {
+public:
+    int minSwap(std::vector<int>& nums) {
+        int n = nums.size();
+
+        std::vector<std::array<int, 3>> arr;
+        arr.reserve(n);
+
+        for (int i = 0; i < n; ++i) {
+            arr.push_back({digitSum(nums[i]), nums[i], i});
+        }
+
+        std::sort(arr.begin(), arr.end(), [](const auto& a, const auto& b) {
+            if (a[0] != b[0]) return a[0] < b[0];
+
+            return a[1] < b[1];
+        });
+
+        std::vector<bool> visited(n, false);
+        int ans = 0;
+
+        for (int i = 0; i < n; ++i) {
+            if (visited[i]) continue;
+
+            int j = i;
+            int cycleSize = 0;
+
+            while (!visited[j]) {
+                visited[j] = true;
+                ++cycleSize;
+
+                j = arr[j][2];
+            }
+
+            ans += cycleSize - 1;
+        }
+
+        return ans;
+    }
+
+private:
+    int digitSum(int x) {
+        int sum = 0;
+
+        while (x > 0) {
+            sum += x % 10;
+            x /= 10;
+        }
+
+        return sum;
+    }
+};
