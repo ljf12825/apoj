@@ -31,10 +31,10 @@
     - `nums` consists of distinct positive integers.
 */
 
-// Solution 原数组使用sort自定义排序后，通过置换环求解
 #include <algorithm>
 #include <array>
 #include <vector>
+// Solution 原数组使用sort自定义排序后，通过置换环求解
 class Solution {
 public:
     int minSwap(std::vector<int>& nums) {
