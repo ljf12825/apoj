@@ -19,3 +19,35 @@
     - `1 <= digits.length <= 4`
     - `digits[i]` is a digit in the range `['2', '9']`.
 */
+
+#include <string>
+#include <vector>
+// Solution1：DFS回溯，建立数字到字母的映射，然后对输入字串逐位做DFS：每层选一个数字对应的一个字母，选完所有数字就得到一个组合
+class Solution1 {
+public:
+    std::vector<std::string> letterCombination(std::string digits) {
+        std::vector<std::string> mapping = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+
+        std::vector<std::string> res;
+        std::string path;
+        backtrack(digits, 0, mapping, path, res);
+        return res;
+    }
+
+private:
+    void backtrack(const std::string& digits, int idx, const std::vector<std::string>& mapping, std::string& path, std::vector<std::string>& res) {
+        if (idx == digits.size()) {
+            res.push_back(path);
+            return;
+        }
+
+        const std::string& letters = mapping[digits[idx] - '0'];
+        for (char c : letters) {
+            path.push_back(c);
+            backtrack(digits, idx + 1, mapping, path, res);
+            path.pop_back();
+        }
+    }
+};
+
+// Solution2: BFS
