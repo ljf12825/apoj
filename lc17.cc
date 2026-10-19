@@ -21,12 +21,13 @@
 */
 
 #include <string>
+#include <utility>
 #include <vector>
 // Solution1：DFS回溯，建立数字到字母的映射，然后对输入字串逐位做DFS：每层选一个数字对应的一个字母，选完所有数字就得到一个组合
 class Solution1 {
 public:
     std::vector<std::string> letterCombination(std::string digits) {
-        std::vector<std::string> mapping = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        std::vector<std::string> mapping = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
 
         std::vector<std::string> res;
         std::string path;
@@ -51,3 +52,22 @@ private:
 };
 
 // Solution2: BFS
+class Solution2 {
+public:
+    std::vector<std::string> letterCombination(std::string digits) {
+        if (digits.empty()) return {};
+
+        std::vector<std::string> mp = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+
+        std::vector<std::string> res = {""};
+        for (char d : digits) {
+            std::vector<std::string> next;
+            for (const std::string& s : res)
+                for (char c : mp[d - '0'])
+                    next.push_back(s + c);
+            res = std::move(next);
+        }
+
+        return res;
+    }
+};
