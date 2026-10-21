@@ -39,12 +39,12 @@ public:
         int n = nums.size();
         if (n < 3) return result;
 
-        std::sort(nums.begin(), nums.end());
+        std::sort(nums.begin(), nums.end()); // std::sort默认升序
 
         for (int i = 0; i < n - 2; ++i) {
-            if (nums[i] > 0) break;
+            if (nums[i] > 0) break; // 我要找的第一个数就大于零，那么不用看了，后面的都大于0，相加不可能等于0
 
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // 避免算出重复结果，外层循环一次会把nums[i]的所有结果全部找到
 
             int left = i + 1;
             int right = n - 1;
@@ -56,7 +56,7 @@ public:
                 if (sum == target) {
                     result.push_back({nums[i], nums[left], nums[right]});
 
-                    while (left < right && nums[left] == nums[left + 1]) ++ left;
+                    while (left < right && nums[left] == nums[left + 1]) ++left;
                     while (left < right && nums[right] == nums[right - 1]) --right;
 
                     ++left;
