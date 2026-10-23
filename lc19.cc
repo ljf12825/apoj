@@ -57,7 +57,7 @@ public:
     }
 };
 
-// Solution2：双指针，先让fast指针走出一段n + 1的距离，然后slow和fast一块走，这样fast走到尾部后slow的位置就是要删除指针的前驱
+// Solution2：双指针，先让fast指针走出一段n + 1的距离，然后slow和fast一块走，这样间距就固定，fast走到尾部后slow的位置就是要删除指针的前驱，时间复杂度O(n)，空间复杂度O(1)
 class Solution2 {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
