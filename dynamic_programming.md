@@ -43,3 +43,5 @@ Dynamic Programming (DP, 动态规划) 是一种把复杂问题分解成相对�
 每个状态只计算一次，时间复杂度优化至\(O(n)\)
 
 ---
+
+# Catalan Number 卡特兰数
