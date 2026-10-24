@@ -2,3 +2,4 @@
 
 - BFS
 - DFS
+- Pruning
