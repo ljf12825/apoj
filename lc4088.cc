@@ -1,4 +1,5 @@
 // LC4088. Difference Between Peaks and Valleys
+// LeetCode Biweekly Contest 195 Q1
 
 /*
    You are given an integer array `nums` of length `n`.
@@ -43,3 +44,20 @@
    - `3 <= n == nums.length <= 100`
    - `-100 <= nums[i] <= 100`
 */
+
+#include <vector>
+
+class Solution {
+public:
+    int peakValleyDifference(std::vector<int>& nums) {
+        int n = nums.size() - 1;
+        int i = 1;
+        int sum = 0;
+        while (i < n) {
+            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) sum += nums[i];
+            if (nums[i] < nums[i - 1] && nums[i] < nums[i + 1]) sum -= nums[i];
+        }
+
+        return sum;
+    }
+};
