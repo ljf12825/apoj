@@ -35,3 +35,27 @@
 
    - `1 <= a, b <= 100`
 */
+
+class Solution {
+public:
+    int calculateScore(int a, int b) {
+        int res = 0;
+        int resa = calchelper(a);
+        int resb = calchelper(b);
+
+        res = (resa >= resb) ? resa * resb : resb / resa;
+
+        return res;
+    }
+
+private:
+    int calchelper(int temp) {
+        int sum = 0;
+        while (temp > 0) {
+            sum += temp % 2;
+            temp /= 2;
+        }
+
+        return sum;
+    }
+};
