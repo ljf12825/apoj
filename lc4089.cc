@@ -30,7 +30,8 @@
 
 #include <vector>
 
-class Solution {
+// Solution1：我当时的写法，i和j状态一直乱跳，不够优雅
+class Solution1 {
 public:
     long long countSubarrays(std::vector<int>& nums, int minK, int maxK) {
         long long res = 0;
@@ -50,6 +51,49 @@ public:
                 j = i;
                 res += (len * (len + 1)) / 2;
             } else { ++i; ++j; }
+        }
+
+        return res;
+    }
+};
+
+// Solution2：单指针遍历，累计连续长度
+class Solution2 {
+public:
+    long long countSubarrays(std::vector<int>& nums, int minK, int maxK) {
+        long long res = 0;
+        long long valid_len = 0;
+
+        for (int x : nums) {
+            if (x >= minK && x <= maxK) {
+                valid_len++;
+                res += valid_len;
+            } else valid_len = 0;
+        }
+
+        return res;
+    }
+};
+
+// Solution3：双指针 / 分割块，算是对我原先思路的优化
+class Solution3 {
+public:
+    long long countSubarrays(std::vector<int>& nums, int minK, int maxK) {
+        long long res = 0;
+        int n = nums.size();
+        int i = 0;
+
+        while (i < n) {
+            if (nums[i] < minK || nums[i] > maxK) {
+                ++i;
+                continue;
+            }
+
+            int start = i;
+            while (i < n && nums[i] >= minK && nums[i] <= maxK) ++i;
+
+            long long len = i - start;
+            res += (len * (len + 1)) / 2;
         }
 
         return res;
