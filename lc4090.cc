@@ -44,3 +44,37 @@
    - `2 <= s.length <= 2000`
    - `s`a consists of lowercase English letters.
 */
+
+#include <algorithm>
+#include <string>
+class Solution {
+public:
+    int countMagicalPairs(std::string s) {
+        int n = s.size();
+        int res = 0;
+
+        for (int j = 0; j + 1 < n; ++j) {
+            int distleft[27] = {0};
+            int appear[26] = {0};
+            int pos = 0;
+            for (int i = j; i >= 0; --i) {
+                int c = s[i] - 'a';
+                if (appear[c]++ == 0) ++pos;
+                distleft[pos]++;
+            }
+
+            int distright[27] = {0};
+            std::fill(appear, appear + 26, 0);
+            pos = 0;
+            for (int k = j + 1; k < n; ++k) {
+                int c = s[k] - 'a';
+                if (appear[c]++ == 0) ++pos;
+                distright[pos]++;
+            }
+
+            for (int x = 1; x <= 26; ++x) res += distleft[x] * distright[x];
+        }
+
+        return res;
+    }
+};
