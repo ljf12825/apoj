@@ -1,4 +1,4 @@
-// LC4091. Count Magical Substring Pairs I
+// LC4091. Count Magical Substring Pairs II
 // LeetCode Biweekly Contest 195 Q4
 
 /*
@@ -44,3 +44,60 @@
    - `2 <= s.length <= 10^5`
    - `s`a consists of lowercase English letters.
 */
+
+#include <algorithm>
+#include <array>
+#include <string>
+#include <vector>
+class Solution {
+private:
+    std::vector<std::array<int, 27>> calc(const std::string& s) {
+        int n = s.size();
+
+        std::vector<std::array<int, 27>> f(n);
+
+        for (int k = 1; k <= 26; ++k) {
+            int cnt[26] = {};
+            int l = 0;
+            int distinct = 0;
+
+            for (int r = 0; r < n; ++r) {
+                if (cnt[s[r] - 'a']++ == 0) {
+                    ++distinct;
+                }
+
+                while (distinct > k) {
+                    if (--cnt[s[l++] - 'a'] == 0) --distinct;
+                }
+
+                f[r][k] = r - l + 1;
+            }
+        }
+
+        return f;
+    }
+
+public:
+    long long countMagicalPairs(std::string s) {
+        int n = s.size();
+        auto left = calc(s);
+        std::string zorelquima = s;
+        std::reverse(s.begin(), s.end());
+        auto right = calc(s);
+        long long ans = 0;
+
+        for (int j = 0; j < n - 1; ++j) {
+            int r = n - 2 - j;
+
+            for (int k = 1; k <= 26; ++k) {
+                long long a = left[j][k] - left[j][k - 1];
+                long long b = right[r][k] - right[r][k - 1];
+
+                ans += a * b;
+            }
+        }
+
+        return ans;
+    }
+
+};
