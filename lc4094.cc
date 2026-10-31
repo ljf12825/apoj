@@ -46,3 +46,38 @@
    - `1 <= nums.length <= 1500`
    - `1 <= nums[i] <= 10^5`
 */
+
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    int countStaircase(std::vector<int>& nums) {
+        int n = nums.size();
+        int res = 0;
+
+        for (int left = 0; left < n; ++left) {
+            std::unordered_map<int, int> freq;
+            std::vector<int> order;
+
+            for (int right = left; right < n; ++right) {
+                int val = nums[right];
+                if (freq.find(val) == freq.end()) order.push_back(val);
+
+                freq[val]++;
+
+                bool flag = true;
+                for (int i = 0; i < (int)order.size(); ++i) {
+                    if (freq[order[i]] != i + 1) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag) res++;
+            }
+        }
+
+        return res;
+    }
+};
