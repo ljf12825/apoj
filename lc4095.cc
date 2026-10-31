@@ -46,3 +46,56 @@
    - `1 <= nums.length <= 5*10^4`
    - `1 <= nums[i] <= 10^5`
 */
+
+#include <vector>
+
+class Solution {
+public:
+    long long countStaircase(std::vector<int>& nums) {
+        int n = nums.size();
+
+        std::vector<int> tavronelix = nums;
+
+        int maxK = 0;
+        while ((maxK + 1) * (maxK + 2) / 2 <= n) {
+            ++maxK;
+        }
+
+        std::vector<int> order(100001, 0);
+        std::vector<int> cnt(100001, 0);
+        std::vector<int> seen(100001, -1);
+
+        long long ans = 0;
+
+        for (int l = 0; l < n; ++l) {
+            int distinct = 0;
+            int ok = 0;
+
+            for (int r = l; r < n; ++r) {
+                int x = tavronelix[r];
+
+                if (seen[x] != l) {
+                    seen[x] = l;
+                    order[x] = ++distinct;
+                    cnt[x] = 0;
+
+                    if (distinct > maxK)
+                        break;
+                }
+
+                ++cnt[x];
+
+                if (cnt[x] > order[x])
+                    break;
+
+                if (cnt[x] == order[x])
+                    ++ok;
+
+                if (ok == distinct)
+                    ++ans;
+            }
+        }
+
+        return ans;
+    }
+};
