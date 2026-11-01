@@ -1,4 +1,5 @@
 // LC4097. Minimum Value of Merged Integers
+// LeetCode Weekly Contest 526 Q1
 
 /*
    You are given an integer array `nums` of even length `n`.
