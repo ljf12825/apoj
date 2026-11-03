@@ -24,3 +24,18 @@
    - `1 <= nums.length <= 100`
    - `1 <= nums[i] <= 100`
 */
+
+#include <algorithm>
+#include <vector>
+
+class Solution {
+public:
+    int minMoves(std::vector<int>& nums) {
+        int maxval = *std::max_element(nums.begin(), nums.end());
+        int res = 0;
+
+        for (int num : nums) res += maxval - num;
+
+        return res;
+    }
+};
