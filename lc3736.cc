@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <vector>
 
+// 这题相比I和II简单，直接模拟就可以解决
 class Solution {
 public:
     int minMoves(std::vector<int>& nums) {
