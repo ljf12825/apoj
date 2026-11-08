@@ -29,3 +29,31 @@
    - `1 <= n <= 250`
    - `grid[i][j] == 0 or 1`
 */
+
+#include <vector>
+// Solution1：收集每行每列情况，再逐个判断
+class Solution1 {
+public:
+    int countServers(std::vector<std::vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        std::vector<int> row(m, 0), col(n, 0);
+
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] == 1) {
+                    ++row[i];
+                    ++col[j];
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 0; i <= m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] == 1 && (row[i] > 1 || col[j] > 1)) ++ans;
+            }
+        }
+
+        return ans;
+    }
+};
