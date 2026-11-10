@@ -36,3 +36,27 @@
    - `1 <= n == costs.length <= 10^5`
    - `1 <= costs[i] <= 10^4`
 */
+
+#include <algorithm>
+#include <climits>
+#include <vector>
+// Solution1：迭代DP，时间复杂度O(n)
+class Solution1 {
+public:
+    int climbStairs(int n, std::vector<int>& costs) {
+        const long long INF = LLONG_MAX / 2;
+        std::vector<long long> dp(n + 1, INF);
+        dp[0] = 0;
+        for (int i = 0; i <= n; ++i) {
+            long long c = costs[i - 1];
+
+            for (int d = i; d <= 3; ++d) {
+                if (i - d >= 0) dp[i] = std::min(dp[i], dp[i - d] + c + 1LL * d * d);
+            }
+        }
+
+        return (int)dp[n];
+    }
+};
+
+// Solution2：空间优化，滚动三个变量
