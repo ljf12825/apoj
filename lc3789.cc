@@ -34,3 +34,24 @@
    - `1 <= cost1, cost2, costBoth <= 10^5`
    - `0 <= need1, need2 <= 10^9`
 */
+
+#include <algorithm>
+// 时间复杂度O(1)，空间复杂度O(1)
+class Solution {
+public:
+    long long minimumCost(int cost1, int cost2, int costBoth,
+                          int need1, int need2) {
+        long long both = std::min(need1, need2);
+
+        long long ans = both * std::min(costBoth, cost1 + cost2);
+
+        if (need1 > need2) {
+            ans += 1LL * (need1 - need2) * std::min(cost1, costBoth);
+        } else {
+            ans += 1LL * (need2 - need1) * std::min(cost2, costBoth);
+        }
+
+        return ans;
+    }
+};
+
