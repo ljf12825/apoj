@@ -24,3 +24,30 @@
    - `1 <= nums.length <= 50`
    - `1 <= nums[i] <= 50`
 */
+
+#include <algorithm>
+#include <vector>
+
+class Solution {
+public:
+    int longestMonotonicSubarray(std::vector<int>& nums) {
+        int res = 1, tres1 = 1, tres2 = 1;
+        int n = nums.size();
+
+        for (int i = 0; i + 1 < n; ++i) {
+            if (nums[i] < nums[i + 1]) {
+                ++tres1;
+                res = std::max(res, tres1);
+            } else tres1 = 1;
+        }
+
+        for (int i = 0; i + 1 < n; ++i) {
+            if (nums[i] > nums[i + 1]) {
+                ++tres2;
+                res = std::max(res, tres2);
+            } else tres2 = 1;
+        }
+
+        return res;
+    }
+};
