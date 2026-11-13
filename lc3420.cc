@@ -31,3 +31,45 @@
    - `1 <= nums[i] <= 10^9`
    - `1 <= k <= 10^9`
 */
+
+#include <deque>
+#include <utility>
+#include <vector>
+
+class Solution {
+public:
+    long long countNonDecreasingSubarrays(std::vector<int>& nums, int k) {
+        int n = nums.size();
+        long long ans = 0;
+        long long cost = 0;
+
+        std::deque<std::pair<int, int>> dq;
+
+        int r = n - 1;
+
+        for (int l = n - 1; l >= 0; --l) {
+            int val = nums[l];
+            int cnt = 1;
+
+            while (!dq.empty() && dq.front().first <= val) {
+                auto [front_val, front_cnt] = dq.front();
+                dq.pop_front();
+                cost += 1LL * (val - front_val) * front_cnt;
+                cnt += front_cnt;
+            }
+            dq.push_front({val, cnt});
+
+            while (cost > k) {
+                auto& [back_val, back_cnt] = dq.back();
+                cost -= (back_val - nums[r]);
+                --back_cnt;
+                if (back_cnt == 0) dq.pop_back();
+                --r;
+            }
+
+            ans += (r - l + 1);
+        }
+
+        return ans;
+    }
+};
