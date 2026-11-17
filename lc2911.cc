@@ -47,3 +47,59 @@
    - `1 <= k <= s.length/ 2`
    - `s` contains only lowercase English letters.
 */
+
+#include <algorithm>
+#include <string>
+#include <vector>
+
+class Solution {
+public:
+    int minimumChanges(std::string s, int k) {
+        int n = s.size();
+        const int INF = 1e9;
+
+        std::vector<std::vector<int>> divs(n + 1);
+        for (int d = 1; d <= n; ++d) {
+            for (int multiple = d * 2; multiple <= n; multiple += d) {
+                divs[multiple].push_back(d);
+            }
+        }
+
+        std::vector<std::vector<int>> cost(n, std::vector<int>(n, INF));
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                int L = j - i + 1;
+                int min_ops = L;
+                for (int d : divs[L]) {
+                    int ops = 0;
+                    for (int r = 0; r < d; ++r) {
+                        int l_ptr = i + r;
+                        int r_ptr = j - d + 1 + r;
+                        while (l_ptr < r_ptr) {
+                            if (s[l_ptr] != s[r_ptr]) ++ops;
+                            l_ptr += d;
+                            r_ptr -= d;
+                        }
+                    }
+
+                    min_ops = std::min(min_ops, ops);
+                }
+
+                cost[i][j] = min_ops;
+            }
+        }
+
+        std::vector<std::vector<int>> dp(n + 1, std::vector<int>(k + 1, INF));
+        dp[0][0] = 0;
+
+        for (int j = 1; j <= k; ++j) {
+            for (int i = j * 2; i <= n; ++i) {
+                for (int p = (j - 1) * 2; p <= i - 2; ++p) {
+                    dp[i][j] = std::min(dp[i][j], dp[p][j - 1] + cost[p][i - 1]);
+                }
+            }
+        }
+
+        return dp[n][k];
+    }
+};
