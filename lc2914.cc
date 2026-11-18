@@ -34,3 +34,18 @@
    - `s` has an even length.
    - `s[i]` is eigher `'0'` or `'1'`.
 */
+
+#include <string>
+
+class Solution {
+public:
+    int minChanges(std::string s) {
+        int ans = 0;
+        int n = s.size();
+        for (int i = 1; i < n; i += 2) {
+            if (s[i] != s[i - 1]) ans++;
+        }
+
+        return ans;
+    }
+};
