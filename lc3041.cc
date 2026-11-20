@@ -26,3 +26,22 @@
    - `1 <= nums.length <= 10^5`
    - `1 <= nums[i] <= 10^6`
 */
+
+#include <algorithm>
+#include <unordered_map>
+#include <vector>
+class Solution {
+public:
+    int maxSelectedElements(std::vector<int>& nums) {
+        std::ranges::sort(nums);
+        std::unordered_map<int, int> dp;
+        int ans = 0;
+        for (int x : nums) {
+            dp[x + 1] = dp[x] + 1;
+            dp[x] = dp[x - 1] + 1;
+            ans = std::max({ans, dp[x + 1], dp[x]});
+        }
+
+        return ans;
+    }
+};
